@@ -1,2 +1,3 @@
 # Funkin-Optimized
-Optimized version of the original Funkin repository
+
+More optimized version of the week 7 version of Friday Night Funkin'.
