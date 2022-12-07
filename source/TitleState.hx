@@ -9,7 +9,6 @@ import openfl.net.NetStream;
 import openfl.media.Video;
 import openfl.Lib;
 #end
-
 import ui.PreferencesMenu;
 import shaderslmfao.ColorSwap;
 import flixel.FlxG;
@@ -25,8 +24,6 @@ import flixel.math.FlxRect;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-
-using StringTools;
 
 class TitleState extends MusicBeatState {
 	public static var initialized:Bool = false;
@@ -157,7 +154,7 @@ class TitleState extends MusicBeatState {
 	}
 
 	function getIntroTextShit():Array<Array<String>> {
-		var firstArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('introText')); var swagGoodArray:Array<Array<String>> = [];
+		var firstArray:Array<String> = Paths.getTextFileArray(Paths.txt('introText')); var swagGoodArray:Array<Array<String>> = [];
 
 		for (i in firstArray) swagGoodArray.push(i.split('--'));
 		return swagGoodArray;

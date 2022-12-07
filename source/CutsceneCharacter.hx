@@ -5,8 +5,6 @@ import flixel.math.FlxPoint;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import haxe.ds.StringMap;
 
-using StringTools;
-
 class CutsceneCharacter extends FlxTypedGroup<Dynamic>
 {
 	var coolPos:FlxPoint = FlxPoint.get();

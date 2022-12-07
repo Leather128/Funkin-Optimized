@@ -11,10 +11,8 @@ class Paths
 
 	static var currentLevel:String;
 
-	static public function setCurrentLevel(name:String)
-	{
+	inline static public function setCurrentLevel(name:String)
 		currentLevel = name.toLowerCase();
-	}
 
 	static public function getPath(file:String, type:AssetType, library:Null<String>)
 	{
@@ -70,7 +68,7 @@ class Paths
 		return getPath('data/$key.json', TEXT, library);
 	}
 
-	static public function sound(key:String, ?library:String)
+	inline static public function sound(key:String, ?library:String)
 	{
 		return getPath('sounds/$key.$SOUND_EXT', SOUND, library);
 	}
@@ -118,5 +116,17 @@ class Paths
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
+	}
+
+	public static function getTextFileArray(path:String, delimeter:String = '\n'):Array<String>
+	{
+		var daList:Array<String> = openfl.Assets.getText(path).trim().split(delimeter);
+
+		for (i in 0...daList.length)
+		{
+			daList[i] = daList[i].trim();
+		}
+
+		return daList;
 	}
 }

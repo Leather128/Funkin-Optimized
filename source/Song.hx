@@ -5,8 +5,6 @@ import haxe.Json;
 import haxe.format.JsonParser;
 import lime.utils.Assets;
 
-using StringTools;
-
 typedef SwagSong =
 {
 	var song:String;

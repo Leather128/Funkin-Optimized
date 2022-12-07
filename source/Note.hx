@@ -4,10 +4,7 @@ import ui.PreferencesMenu;
 import shaderslmfao.ColorSwap;
 import flixel.FlxSprite;
 
-using StringTools;
-
-class Note extends FlxSprite
-{
+class Note extends FlxSprite {
 	public var strumTime:Float = 0;
 
 	public var mustPress:Bool = false;
@@ -23,7 +20,7 @@ class Note extends FlxSprite
 	public var isSustainNote:Bool = false;
 
 	var colorSwap:ColorSwap;
-	
+
 	public static var swagWidth:Float = 160 * 0.7;
 	public static var arrowColors = [1, 1, 1, 1];
 	public static var PURP_NOTE:Int = 0;
@@ -31,8 +28,7 @@ class Note extends FlxSprite
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false)
-	{
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false) {
 		super();
 
 		if (prevNote == null)
@@ -48,8 +44,7 @@ class Note extends FlxSprite
 
 		this.noteData = noteData;
 
-		switch (PlayState.curStage)
-		{
+		switch (PlayState.curStage) {
 			case 'school' | 'schoolEvil':
 				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
 
@@ -58,8 +53,7 @@ class Note extends FlxSprite
 				animation.add('blueScroll', [5]);
 				animation.add('purpleScroll', [4]);
 
-				if (isSustainNote)
-				{
+				if (isSustainNote) {
 					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds'), true, 7, 6);
 
 					animation.add('purpleholdend', [4]);
@@ -103,8 +97,7 @@ class Note extends FlxSprite
 		shader = colorSwap.shader;
 		updateColors();
 
-		switch (noteData)
-		{
+		switch (noteData) {
 			case 0:
 				x += swagWidth * 0;
 				animation.play('purpleScroll');
@@ -121,19 +114,16 @@ class Note extends FlxSprite
 
 		// trace(prevNote);
 
-		if (isSustainNote && prevNote != null)
-		{
+		if (isSustainNote && prevNote != null) {
 			alpha = 0.6;
 
-			if (PreferencesMenu.getPref('downscroll'))
-			{
+			if (PreferencesMenu.getPref('downscroll')) {
 				angle = 180;
 			}
 
 			x += width / 2;
 
-			switch (noteData)
-			{
+			switch (noteData) {
 				case 0:
 					animation.play('purpleholdend');
 				case 1:
@@ -151,10 +141,8 @@ class Note extends FlxSprite
 			if (PlayState.curStage.startsWith('school'))
 				x += 30;
 
-			if (prevNote.isSustainNote)
-			{
-				switch (prevNote.noteData)
-				{
+			if (prevNote.isSustainNote) {
+				switch (prevNote.noteData) {
 					case 0:
 						prevNote.animation.play('purplehold');
 					case 1:
@@ -172,46 +160,34 @@ class Note extends FlxSprite
 		}
 	}
 
-	function updateColors()
-	{
+	function updateColors() {
 		colorSwap.update(arrowColors[noteData]);
 	}
 
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (mustPress)
-		{
-			if (willMiss && !wasGoodHit)
-			{
+		if (mustPress) {
+			if (willMiss && !wasGoodHit) {
 				tooLate = true;
 				canBeHit = false;
-			}
-			else
-			{
-				if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset)
-				{
+			} else {
+				if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset) {
 					if (strumTime < Conductor.songPosition + 0.5 * Conductor.safeZoneOffset)
 						canBeHit = true;
-				}
-				else
-				{
+				} else {
 					willMiss = true;
 					canBeHit = true;
 				}
 			}
-		}
-		else
-		{
+		} else {
 			canBeHit = false;
 
 			if (strumTime <= Conductor.songPosition)
 				wasGoodHit = true;
 		}
 
-		if (tooLate)
-		{
+		if (tooLate) {
 			if (alpha > 0.3)
 				alpha = 0.3;
 		}

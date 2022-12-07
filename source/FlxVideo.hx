@@ -6,8 +6,6 @@ import flixel.FlxG;
 import openfl.media.Video;
 import flixel.FlxBasic;
 
-using StringTools;
-
 class FlxVideo extends FlxBasic
 {
 	var video:Video;

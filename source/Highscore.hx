@@ -4,12 +4,14 @@ import flixel.FlxG;
 
 class Highscore
 {
-	#if (haxe >= "4.0.0")
-	public static var songScores:Map<String, Int> = new Map();
-	#else
-	public static var songScores:Map<String, Int> = new Map<String, Int>();
-	#end
+	public static var difficultyArray:Array<String> = ['EASY', 'NORMAL', 'HARD'];
+	public static var difficultyString(get, null):String;
 
+	private static function get_difficultyString():String {
+		return difficultyArray[PlayState.storyDifficulty];
+	}
+
+	public static var songScores:Map<String, Int> = new Map();
 
 	public static function saveScore(song:String, score:Int = 0, ?diff:Int = 0):Void
 	{
@@ -26,7 +28,7 @@ class Highscore
 
 	public static function saveWeekScore(week:Int = 1, score:Int = 0, ?diff:Int = 0):Void
 	{
-		var daWeek:String = formatSong('week' + week, diff);
+		var daWeek:String = formatSong('week${week}', diff);
 
 		if (songScores.exists(daWeek))
 		{
@@ -52,10 +54,8 @@ class Highscore
 	{
 		var daSong:String = song;
 
-		if (diff == 0)
-			daSong += '-easy';
-		else if (diff == 2)
-			daSong += '-hard';
+		if (diff == 0) daSong += '-easy';
+		else if (diff == 2) daSong += '-hard';
 
 		return daSong;
 	}
