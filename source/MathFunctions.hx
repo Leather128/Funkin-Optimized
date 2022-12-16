@@ -3,7 +3,8 @@ package;
 class MathFunctions {
 	public static function numberArray(max:Int, ?min = 0):Array<Int> {
 		var dumbArray:Array<Int> = [];
-		for (i in min...max) dumbArray.push(i);
+		for (i in min...max)
+			dumbArray.push(i);
 		return dumbArray;
 	}
 

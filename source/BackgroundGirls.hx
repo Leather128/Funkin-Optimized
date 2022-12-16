@@ -15,8 +15,8 @@ class BackgroundGirls extends flixel.FlxSprite {
 	}
 
 	public function playAnims(suffix:String):Void {
-		animation.addByIndices('danceLeft', 'BG {suffix}', MathFunctions.numberArray(14), "", 24, false);
-		animation.addByIndices('danceRight', 'BG ${suffix}', MathFunctions.numberArray(30, 15), "", 24, false);
+		animation.addByIndices('danceLeft', 'BG {suffix}', MathFunctions.numberArray(14), '', 24, false);
+		animation.addByIndices('danceRight', 'BG ${suffix}', MathFunctions.numberArray(30, 15), '', 24, false);
 		dance();
 		animation.finish();
 	}

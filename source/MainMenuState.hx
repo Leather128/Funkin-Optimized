@@ -33,7 +33,7 @@ class MainMenuState extends MusicBeatState {
 
 	override function create() {
 		#if discord_rpc
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence('In the Menus', null);
 		#end
 
 		if (!FlxG.sound.music.playing)
@@ -68,15 +68,15 @@ class MainMenuState extends MusicBeatState {
 		add(menuItems);
 		menuItems.onChange.add(onMenuItemChange);
 		menuItems.onAcceptPress.add(function(item:MenuItem) FlxFlicker.flicker(magenta, 1.1, 0.15, false, true));
-		menuItems.createItem(null, null, "story mode", function() startExitState(new StoryMenuState()));
-		menuItems.createItem(null, null, "freeplay", function() startExitState(new FreeplayState()));
+		menuItems.createItem(null, null, 'story mode', function() startExitState(new StoryMenuState()));
+		menuItems.createItem(null, null, 'freeplay', function() startExitState(new FreeplayState()));
 
 		if (VideoState.seenVideo)
-			menuItems.createItem(null, null, "kickstarter", selectDonate, true);
+			menuItems.createItem(null, null, 'kickstarter', selectDonate, true);
 		else
-			menuItems.createItem(null, null, "donate", selectDonate, true);
+			menuItems.createItem(null, null, 'donate', selectDonate, true);
 
-		menuItems.createItem(0, 0, "options", function() startExitState(new OptionsState()));
+		menuItems.createItem(0, 0, 'options', function() startExitState(new OptionsState()));
 
 		var pos:Float = (FlxG.height - 160 * (menuItems.length - 1)) / 2;
 		for (i in 0...menuItems.length) {
@@ -87,12 +87,12 @@ class MainMenuState extends MusicBeatState {
 
 		FlxG.camera.follow(camFollow, null, 0.06);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version'), 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, 'v' + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat('VCR OSD Mono', 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		#if ng
-		versionShit.text += "(Newgrounds exclusive preview)";
+		versionShit.text += '(Newgrounds exclusive preview)';
 		#end
 
 		super.create();
@@ -109,8 +109,8 @@ class MainMenuState extends MusicBeatState {
 	function selectDonate() {
 		#if linux
 		Sys.command('/usr/bin/xdg-open', [
-			"https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/",
-			"&"
+			'https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/',
+			'&'
 		]);
 		#else
 		FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/');

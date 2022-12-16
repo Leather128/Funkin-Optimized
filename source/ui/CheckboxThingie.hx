@@ -2,12 +2,10 @@ package ui;
 
 import flixel.FlxSprite;
 
-class CheckboxThingie extends FlxSprite
-{
+class CheckboxThingie extends FlxSprite {
 	public var daValue(default, set):Bool;
 
-	override public function new(x:Float, y:Float, state:Bool = false)
-	{
+	override public function new(x:Float, y:Float, state:Bool = false) {
 		super(x, y);
 		frames = Paths.getSparrowAtlas('checkboxThingie');
 		animation.addByPrefix('static', 'Check Box unselected', 24, false);
@@ -18,11 +16,9 @@ class CheckboxThingie extends FlxSprite
 		daValue = state;
 	}
 
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		super.update(elapsed);
-		switch (animation.curAnim.name)
-		{
+		switch (animation.curAnim.name) {
 			case 'checked':
 				offset.set(17, 70);
 			case 'static':
@@ -30,8 +26,7 @@ class CheckboxThingie extends FlxSprite
 		}
 	}
 
-	function set_daValue(state:Bool)
-	{
+	function set_daValue(state:Bool) {
 		if (state)
 			animation.play('checked', true);
 		else

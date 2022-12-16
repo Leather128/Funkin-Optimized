@@ -2,8 +2,7 @@ package;
 
 import flixel.FlxSprite;
 
-class HealthIcon extends FlxSprite
-{
+class HealthIcon extends FlxSprite {
 	/**
 	 * Used for FreeplayState! If you use it elsewhere, prob gonna annoying
 	 */
@@ -13,8 +12,7 @@ class HealthIcon extends FlxSprite
 	public var isPlayer:Bool = false;
 	public var isOldIcon:Bool = false;
 
-	public function new(char:String = 'bf', isPlayer:Bool = false)
-	{
+	public function new(char:String = 'bf', isPlayer:Bool = false) {
 		super();
 		this.isPlayer = isPlayer;
 		changeIcon(char);
@@ -22,29 +20,22 @@ class HealthIcon extends FlxSprite
 		scrollFactor.set();
 	}
 
-	public function swapOldIcon()
-	{
+	public function swapOldIcon() {
 		isOldIcon = !isOldIcon;
-		
-		if (isOldIcon)
-		{
+
+		if (isOldIcon) {
 			changeIcon('bf-old');
-		}
-		else
-		{
+		} else {
 			changeIcon('bf');
 		}
 	}
 
-	public function changeIcon(char:String)
-	{
+	public function changeIcon(char:String) {
 		if (char != 'bf-pixel' && char != 'bf-old')
 			char = char.split('-')[0].trim();
 
-		if (char != this.char)
-		{
-			if (animation.getByName(char) == null)
-			{
+		if (char != this.char) {
+			if (animation.getByName(char) == null) {
 				loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
 				animation.add(char, [0, 1], 0, false, isPlayer);
 			}
@@ -53,8 +44,7 @@ class HealthIcon extends FlxSprite
 		}
 	}
 
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		super.update(elapsed);
 
 		if (sprTracker != null)

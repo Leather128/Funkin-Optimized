@@ -3,10 +3,8 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 
-class NoteSplash extends FlxSprite
-{
-	public function new(x:Float, y:Float, ?notedata:Int = 0)
-	{
+class NoteSplash extends FlxSprite {
+	public function new(x:Float, y:Float, ?notedata:Int = 0) {
 		super(x, y);
 		frames = Paths.getSparrowAtlas('noteSplashes');
 		animation.addByPrefix('note1-0', 'note impact 1  blue', 24, false);
@@ -20,8 +18,7 @@ class NoteSplash extends FlxSprite
 		setupNoteSplash(x, y, notedata);
 	}
 
-	public function setupNoteSplash(x:Float, y:Float, ?notedata:Int = 0)
-	{
+	public function setupNoteSplash(x:Float, y:Float, ?notedata:Int = 0) {
 		setPosition(x, y);
 		alpha = 0.6;
 		animation.play('note' + notedata + '-' + FlxG.random.int(0, 1), true);
@@ -30,11 +27,10 @@ class NoteSplash extends FlxSprite
 		offset.set(width * 0.3, height * 0.3);
 	}
 
-	override public function update(elapsed:Float)
-	{
+	override public function update(elapsed:Float) {
 		if (animation.curAnim.finished)
 			kill();
-		
+
 		super.update(elapsed);
 	}
 }

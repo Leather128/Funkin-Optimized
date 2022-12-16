@@ -54,15 +54,15 @@ class LoadingState extends MusicBeatState {
 
 		initSongsManifest().onComplete(function(lib) {
 			callbacks = new MultiCallback(onLoad);
-			var introComplete = callbacks.add("introComplete");
+			var introComplete = callbacks.add('introComplete');
 			checkLoadSong(getSongPath());
 			if (PlayState.SONG.needsVoices)
 				checkLoadSong(getVocalPath());
-			checkLibrary("shared");
+			checkLibrary('shared');
 			if (PlayState.storyWeek > 0)
-				checkLibrary("week" + PlayState.storyWeek);
+				checkLibrary('week' + PlayState.storyWeek);
 			else
-				checkLibrary("tutorial");
+				checkLibrary('tutorial');
 
 			FlxG.camera.fade(FlxG.camera.bgColor, 0.5, true);
 			new FlxTimer().start(1.5, function(_) introComplete());
@@ -71,13 +71,13 @@ class LoadingState extends MusicBeatState {
 
 	function checkLoadSong(path:String) {
 		if (!Assets.cache.hasSound(path)) {
-			var library = Assets.getLibrary("songs");
-			final symbolPath = path.split(":").pop();
+			var library = Assets.getLibrary('songs');
+			final symbolPath = path.split(':').pop();
 			// @:privateAccess
 			// library.types.set(symbolPath, SOUND);
 			// @:privateAccess
 			// library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
-			var callback = callbacks.add("song:" + path);
+			var callback = callbacks.add('song:' + path);
 			Assets.loadSound(path).onComplete(function(_) {
 				callback();
 			});
@@ -89,9 +89,9 @@ class LoadingState extends MusicBeatState {
 		if (Assets.getLibrary(library) == null) {
 			@:privateAccess
 			if (!LimeAssets.libraryPaths.exists(library))
-				throw "Missing library: " + library;
+				throw 'Missing library: ' + library;
 
-			var callback = callbacks.add("library:" + library);
+			var callback = callbacks.add('library:' + library);
 			Assets.loadLibrary(library).onComplete(function(_) {
 				callback();
 			});
@@ -114,7 +114,7 @@ class LoadingState extends MusicBeatState {
 			funkay.updateHitbox();
 			#if debug
 			if (callbacks != null)
-				trace('fired: ' + callbacks.getFired() + " unfired:" + callbacks.getUnfired());
+				trace('fired: ' + callbacks.getFired() + ' unfired:' + callbacks.getUnfired());
 			#end
 		}
 		if (callbacks != null) {
@@ -143,12 +143,12 @@ class LoadingState extends MusicBeatState {
 	}
 
 	static function getNextState(target:FlxState, stopMusic = false):FlxState {
-		Paths.setCurrentLevel("week" + PlayState.storyWeek);
+		Paths.setCurrentLevel('week' + PlayState.storyWeek);
 
 		#if NO_PRELOAD_ALL
 		var loaded = isSoundLoaded(getSongPath())
 			&& (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath()))
-			&& isLibraryLoaded("shared");
+			&& isLibraryLoaded('shared');
 
 		if (!loaded)
 			return new LoadingState(target, stopMusic);
@@ -174,7 +174,7 @@ class LoadingState extends MusicBeatState {
 	}
 
 	static function initSongsManifest() {
-		var id = "songs";
+		var id = 'songs';
 		var promise = new Promise<AssetLibrary>();
 
 		var library = LimeAssets.getLibrary(id);
@@ -192,9 +192,9 @@ class LoadingState extends MusicBeatState {
 			path = libraryPaths[id];
 			rootPath = Path.directory(path);
 		} else {
-			if (StringTools.endsWith(path, ".bundle")) {
+			if (StringTools.endsWith(path, '.bundle')) {
 				rootPath = path;
-				path += "/library.json";
+				path += '/library.json';
 			} else {
 				rootPath = Path.directory(path);
 			}
@@ -204,14 +204,14 @@ class LoadingState extends MusicBeatState {
 
 		AssetManifest.loadFromFile(path, rootPath).onComplete(function(manifest) {
 			if (manifest == null) {
-				promise.error("Cannot parse asset manifest for library \"" + id + "\"");
+				promise.error('Cannot parse asset manifest for library \'' + id + '\'');
 				return;
 			}
 
 			var library = AssetLibrary.fromManifest(manifest);
 
 			if (library == null) {
-				promise.error("Cannot open library \"" + id + "\"");
+				promise.error('Cannot open library \'' + id + '\'');
 			} else {
 				@:privateAccess
 				LimeAssets.libraries.set(id, library);
@@ -219,7 +219,7 @@ class LoadingState extends MusicBeatState {
 				promise.completeWith(Future.withValue(library));
 			}
 		}).onError(function(_) {
-			promise.error("There is no asset library with an ID of \"" + id + "\"");
+			promise.error('There is no asset library with an ID of \'' + id + '\'');
 		});
 
 		return promise.future;
@@ -240,7 +240,7 @@ class MultiCallback {
 		this.logId = logId;
 	}
 
-	public function add(id = "untitled") {
+	public function add(id = 'untitled') {
 		id = '$length:$id';
 		length++;
 		numRemaining++;

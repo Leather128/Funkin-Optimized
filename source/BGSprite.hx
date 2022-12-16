@@ -3,8 +3,8 @@ package;
 class BGSprite extends flixel.FlxSprite {
 	public var idleAnim:String = null;
 
-	override public function new(image:String, x:Float = 0, y:Float = 0, ?scrollFactor:Vector2, animations:Array<String> = null,
-			loopAnims:Bool = false, ?scale:Vector2, antialiasing:Bool = true) {
+	override public function new(image:String, x:Float = 0, y:Float = 0, ?scrollFactor:Vector2, animations:Array<String> = null, loopAnims:Bool = false,
+			?scale:Vector2, antialiasing:Bool = true) {
 		super(x, y);
 
 		if (animations != null) {
@@ -19,8 +19,10 @@ class BGSprite extends flixel.FlxSprite {
 		} else
 			loadGraphic(Paths.image(image));
 
-		if (scrollFactor != null) this.scrollFactor.set(scrollFactor.x, scrollFactor.y);
-		if (scale != null) this.scale.set(scale.x, scale.y);
+		if (scrollFactor != null)
+			this.scrollFactor.set(scrollFactor.x, scrollFactor.y);
+		if (scale != null)
+			this.scale.set(scale.x, scale.y);
 		this.antialiasing = antialiasing;
 	}
 
