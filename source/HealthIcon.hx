@@ -16,7 +16,6 @@ class HealthIcon extends FlxSprite {
 		super();
 		this.isPlayer = isPlayer;
 		changeIcon(char);
-		antialiasing = true;
 		scrollFactor.set();
 	}
 

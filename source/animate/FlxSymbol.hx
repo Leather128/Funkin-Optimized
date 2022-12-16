@@ -62,7 +62,6 @@ class FlxSymbol extends FlxSprite {
 							spr.origin.x += origin.x;
 							spr.origin.y += origin.y;
 
-							spr.antialiasing = true;
 							spr.draw();
 						} else {
 							var nestedSymbol = symbolMap.get(element.SI.SN);

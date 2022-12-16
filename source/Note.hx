@@ -1,7 +1,7 @@
 package;
 
 import ui.PreferencesMenu;
-import shaderslmfao.ColorSwap;
+import shaders.ColorSwap;
 import flixel.FlxSprite;
 
 class Note extends FlxSprite {
@@ -69,7 +69,7 @@ class Note extends FlxSprite {
 
 				setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 				updateHitbox();
-
+				antialiasing = false;
 			default:
 				frames = Paths.getSparrowAtlas('NOTE_assets');
 
@@ -90,7 +90,6 @@ class Note extends FlxSprite {
 
 				setGraphicSize(Std.int(width * 0.7));
 				updateHitbox();
-				antialiasing = true;
 		}
 
 		colorSwap = new ColorSwap();

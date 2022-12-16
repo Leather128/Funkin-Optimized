@@ -25,7 +25,6 @@ class Character extends FlxSprite {
 		this.isPlayer = isPlayer;
 
 		var tex:FlxAtlasFrames;
-		antialiasing = true;
 
 		switch (curCharacter) {
 			case 'gf':

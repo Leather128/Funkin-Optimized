@@ -114,8 +114,6 @@ class StoryMenuState extends MusicBeatState {
 			grpWeekText.add(weekThing);
 
 			weekThing.screenCenter(X);
-			weekThing.antialiasing = true;
-			// weekThing.updateHitbox();
 
 			// Needs an offset thingie
 			if (!weekUnlocked[i]) {
@@ -124,7 +122,6 @@ class StoryMenuState extends MusicBeatState {
 				lock.animation.addByPrefix('lock', 'lock');
 				lock.animation.play('lock');
 				lock.ID = i;
-				lock.antialiasing = true;
 				grpLocks.add(lock);
 			}
 		}
@@ -134,7 +131,6 @@ class StoryMenuState extends MusicBeatState {
 		for (char in 0...3) {
 			var weekCharacterThing:MenuCharacter = new MenuCharacter((FlxG.width * 0.25) * (1 + char) - 150, weekCharacters[curWeek][char]);
 			weekCharacterThing.y += 70;
-			weekCharacterThing.antialiasing = true;
 			switch (weekCharacterThing.character) {
 				case 'bf':
 					weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));

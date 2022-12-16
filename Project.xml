@@ -89,9 +89,13 @@
 
 	<!-- ______________________________ Defines _____________________________ -->
 
-	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
-	<haxedef name="FLX_NO_DEBUG" unless="debug" />
-	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<define name="FLX_NO_FOCUS_LOST_SCREEN" />
+	<define name="FLX_NO_DEBUG" unless="debug" />
+	<define name="NAPE_RELEASE_BUILD" unless="debug" />
+
+	<!-- You can disable these if you want by just commenting them out -->
+	<define name="USE_INST_TIME" if="html5" />
+	<define name="USE_SHADERS" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 

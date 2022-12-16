@@ -3,14 +3,19 @@ package;
 #if discord_rpc
 import Discord.DiscordClient;
 #end
+
+#if USE_SHADERS
+import shaders.ColorSwap;
+#end
+
 #if html5
 import openfl.display.Sprite;
 import openfl.net.NetStream;
 import openfl.media.Video;
 import openfl.Lib;
 #end
+
 import ui.PreferencesMenu;
-import shaderslmfao.ColorSwap;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
@@ -54,7 +59,10 @@ class TitleState extends MusicBeatState {
 		polymod.Polymod.init({modRoot: 'mods', dirs: ['introMod'], framework: OPENFL});
 		#end
 
+		#if USE_SHADERS
 		swagShader = new ColorSwap();
+		#end
+
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 		FlxG.sound.muteKeys = [ZERO];
 
@@ -130,16 +138,18 @@ class TitleState extends MusicBeatState {
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
+		#if USE_SHADERS
 		logoBl.shader = swagShader.shader;
-		logoBl.antialiasing = true;
+		#end
 		add(logoBl);
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], '', 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], '', 24, false);
+		#if USE_SHADERS
 		gfDance.shader = swagShader.shader;
-		gfDance.antialiasing = true;
+		#end
 		add(gfDance);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
@@ -148,7 +158,6 @@ class TitleState extends MusicBeatState {
 		titleText.animation.addByPrefix('press', 'ENTER PRESSED', 24);
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
-		titleText.antialiasing = true;
 		add(titleText);
 
 		credGroup = new FlxGroup();
@@ -160,15 +169,12 @@ class TitleState extends MusicBeatState {
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
-		ngSpr.antialiasing = true;
 		add(ngSpr);
 
 		FlxG.mouse.visible = false;
 
-		if (initialized)
-			skipIntro();
-		else
-			initialized = true;
+		if (initialized) skipIntro();
+		else initialized = true;
 
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.onComplete = function() FlxG.switchState(new VideoState());
@@ -186,8 +192,6 @@ class TitleState extends MusicBeatState {
 	override function update(elapsed:Float) {
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
-		if (FlxG.keys.justPressed.F)
-			FlxG.fullscreen = !FlxG.fullscreen;
 		if (FlxG.keys.justPressed.FIVE || FlxG.keys.justPressed.EIGHT)
 			FlxG.switchState(new CutsceneAnimTestState());
 
@@ -207,8 +211,9 @@ class TitleState extends MusicBeatState {
 
 		if (pressedEnter && !skippedIntro && initialized)
 			skipIntro();
-		if (controls.UI_LEFT || controls.UI_RIGHT)
-			swagShader.update(elapsed * (controls.UI_LEFT ? 0.1 : -0.1));
+		#if USE_SHADERS
+		if (controls.UI_LEFT || controls.UI_RIGHT) swagShader.update(elapsed * (controls.UI_LEFT ? 0.1 : -0.1));
+		#end
 
 		super.update(elapsed);
 	}
@@ -237,13 +242,13 @@ class TitleState extends MusicBeatState {
 	override function beatHit() {
 		super.beatHit();
 
-		logoBl.animation.play('bump');
-		danceLeft = !danceLeft;
-
-		if (danceLeft) // yes this is confusing af but whatever
+		if (logoBl != null && gfDance != null) {
+			logoBl.animation.play('bump');
+			danceLeft = !danceLeft;
 			gfDance.animation.play(danceLeft ? 'danceRight' : 'danceLeft');
+		}
 
-		if (curBeat > lastBeat) {
+		if (curBeat > lastBeat && credGroup != null) {
 			for (i in lastBeat...curBeat) {
 				switch (i + 1) {
 					case 1:

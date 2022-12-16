@@ -13,7 +13,6 @@ class MenuItem extends FlxSprite {
 
 	public function new(?x:Float = 0, ?y:Float = 0, name:String, ?callback:Dynamic) {
 		super(x, y);
-		antialiasing = true;
 		setData(name, callback);
 		idle();
 	}

@@ -48,7 +48,6 @@ class CutsceneCharacter extends FlxTypedGroup<Dynamic> {
 		spr.frames = Paths.getSparrowAtlas(path);
 		spr.animation.addByPrefix('weed', arrayLMFAOOOO[num], 24, false);
 		spr.animation.play('weed');
-		spr.antialiasing = true;
 		spr.animation.finishCallback = function(name:String) {
 			spr.kill();
 			spr.destroy();

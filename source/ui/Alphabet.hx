@@ -1,8 +1,7 @@
-package;
+package ui;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
@@ -177,10 +176,7 @@ class AlphaCharacter extends FlxSprite {
 
 	public function new(x:Float, y:Float) {
 		super(x, y);
-		var tex = Paths.getSparrowAtlas('alphabet');
-		frames = tex;
-
-		antialiasing = true;
+		frames = Paths.getSparrowAtlas('alphabet');
 	}
 
 	public function createBold(letter:String) {

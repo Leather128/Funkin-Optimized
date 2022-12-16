@@ -1,5 +1,6 @@
-package shaderslmfao;
+package shaders;
 
+#if USE_SHADERS
 class ColorSwap {
 	public var shader(default, null):ColorSwapShader = new ColorSwapShader();
 	public var hasOutline:Bool = false;
@@ -16,3 +17,4 @@ class ColorSwap {
 		hueShit += elapsed;
 	}
 }
+#end

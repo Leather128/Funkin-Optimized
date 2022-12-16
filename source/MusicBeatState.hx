@@ -30,6 +30,8 @@ class MusicBeatState extends FlxUIState {
 
 		flixel.FlxG.stage.frameRate = 1000;
 
+		if (FlxG.keys.justPressed.F11) FlxG.fullscreen = !FlxG.fullscreen;
+
 		super.update(elapsed);
 	}
 

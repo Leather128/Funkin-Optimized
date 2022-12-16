@@ -1,5 +1,6 @@
-package shaderslmfao;
+package shaders;
 
+#if USE_SHADERS
 class BuildingShaders {
 	public var shader(default, null):BuildingShader = new BuildingShader();
 
@@ -15,3 +16,4 @@ class BuildingShaders {
 		shader.alphaShit.value[0] = 0;
 	}
 }
+#end

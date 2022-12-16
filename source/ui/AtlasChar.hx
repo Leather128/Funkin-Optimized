@@ -10,7 +10,6 @@ class AtlasChar extends FlxSprite {
 		super(x, y);
 		frames = atlas;
 		this.char = char;
-		antialiasing = true;
 	}
 
 	function set_char(char:String):String {

@@ -17,3 +17,5 @@
 - remove `#if (haxe > 4.0.0)` statements
 - remove unused variables and refactor some other code in `Alphabet`
 - move out functions from `CoolUtil` into seperate classes
+- consistently format code
+- code using built in functions to make things simpler
